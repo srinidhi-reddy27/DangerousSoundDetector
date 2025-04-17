@@ -32,7 +32,7 @@ TWILIO_SID = 'AC3773b3d45f9effb0c07938c8a3b45b47'  # Replace with Twilio SID
 TWILIO_AUTH_TOKEN = 'b471eae49c67be7c692201b3529d99ea'  # Replace with Twilio Auth Token
 TWILIO_FROM = '+19475006677'  # Replace with Twilio phone number
 TWILIO_TO = '+917729936696'  # Replace with recipient phone number
-CLASS_MAP_PATH = r""  # Local path to class map
+CLASS_MAP_PATH = r"yamnet_class_map.csv"  # Local path to class map
 
 # Load YAMNet model and class names
 @st.cache_resource
