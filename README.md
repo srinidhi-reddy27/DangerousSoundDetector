@@ -5,7 +5,7 @@
 ## Features
 - **Real-Time Audio Detection**: Record live audio or upload WAV files to detect dangerous sounds using YAMNet.
 - **Alerts**: Sends email and SMS alerts via Gmail and Twilio when dangerous sounds are detected.
-- **Model Comparison**: Displays accuracy metrics for YAMNet , 1D-CNN , 2D-CNN , and LSTM  based on ESC-50 dataset.
+- **Model Comparison**: Displays accuracy metrics for YAMNet , 1D-CNN , 2D-CNN , and LSTM  based on UrbanSound8k dataset.
 - **UrbanSound8K Support**: Preprocess and train models on the UrbanSound8K dataset for 10-class audio classification.
 - **Location Awareness**: Includes IP-based location in alerts using `geocoder`.
 
