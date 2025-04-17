@@ -1,5 +1,4 @@
-###
-DangerousSoundDetector
+###DangerousSoundDetector
 
 DangerousSoundDetector is a Streamlit-based application for real-time detection of dangerous sounds (e.g., gunshots, screams, explosions) using the YAMNet model. It records or uploads audio, classifies sounds, and sends email/SMS alerts for dangerous events. The project also includes scripts to preprocess the UrbanSound8K dataset and train 1D-CNN, 2D-CNN, and LSTM models for audio classification.
 Features
