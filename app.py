@@ -23,15 +23,16 @@ CHUNK = 1024  # Audio chunk size for streaming
 DURATION = 10  # Record 10-second audio segments
 DANGEROUS_CLASSES = [
     'Gunshot, gunfire', 'Scream', 'Glass break', 'Fire crackling', 'Explosion', 
-    'Shatter', 'Yell', 'Shout', 'Screaming', 'Fire'
+    'Shatter', 'Yell', 'Shout', 'Screaming', 'Fire','Glass','Breaking','Siren'
 ]  # YAMNet classes considered dangerous
 EMAIL_SENDER = 'media270311@gmail.com'  # Replace with your Gmail
 EMAIL_PASSWORD = 'sovy mmpn blxa jzpq'  # Replace with Gmail app password
-EMAIL_RECIPIENT = 'srinidhigouragari7@example.com'  # Replace with recipient email
+EMAIL_RECIPIENT = 'srinidhigouragari7@gmail.com'  # Replace with recipient email
 TWILIO_SID = 'AC3773b3d45f9effb0c07938c8a3b45b47'  # Replace with Twilio SID
-TWILIO_AUTH_TOKEN = 'b471eae49c67be7c692201b3529d99ea'  # Replace with Twilio Auth Token
+TWILIO_AUTH_TOKEN = 'c4d15eef9430b86e0a0407aac588dd61'  # Replace with Twilio Auth Token
 TWILIO_FROM = '+19475006677'  # Replace with Twilio phone number
-TWILIO_TO = '+917729936696'  # Replace with recipient phone number
+TWILIO_TO = '+917729936696'
+ # Replace with recipient phone number
 CLASS_MAP_PATH = r"yamnet_class_map.csv"  # Local path to class map
 
 # Load YAMNet model and class names
@@ -160,20 +161,6 @@ def main():
     model, class_names = load_yamnet()
     if model is None or class_names is None:
         return
-
-    # Display model accuracy information for four models
-    st.markdown("""
-        ### Model Performance Comparison
-        This application uses **YAMNet** for real-time audio classification. Below is a comparison with three other deep learning architectures commonly used for audio classification, based on their performance on the ESC-50 dataset:
-
-        - **YAMNet**: Pre-trained on AudioSet, achieves **90%** accuracy on ESC-50 when fine-tuned for environmental sound classification.
-        - **1D-CNN**: Processes raw audio waveforms, achieves **88%** accuracy on ESC-50, effective for time-domain audio features.
-        - **2D-CNN**: Processes spectrogram inputs, achieves **92%** accuracy on ESC-50, optimized for frequency-domain features.
-        - **LSTM**: Handles sequential audio data, achieves **82%** accuracy on ESC-50, suitable for temporal dependencies.
-
-        Note: YAMNet is used for detection in this app due to its efficiency and compatibility with 16kHz audio. Confidence scores for detected events are shown below as a real-time indicator of YAMNet's prediction reliability.
-    """, unsafe_allow_html=True)
-
     # Session state
     if 'last_alert_time' not in st.session_state:
         st.session_state.last_alert_time = 0
@@ -212,7 +199,7 @@ def main():
 
     # Display detected events inline with messages, emphasizing confidence
     if 'events' in st.session_state:
-        st.write("### Detected Events (with YAMNet Confidence Scores)")
+        st.write("### Detected Events (with Confidence Scores)")
         for sound_class, confidence in st.session_state.events:
             is_dangerous = sound_class in DANGEROUS_CLASSES
             color = "#ff4d4d" if is_dangerous else "#4caf50"
