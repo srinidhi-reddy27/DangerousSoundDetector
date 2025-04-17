@@ -25,14 +25,14 @@ DANGEROUS_CLASSES = [
     'Gunshot, gunfire', 'Scream', 'Glass break', 'Fire crackling', 'Explosion', 
     'Shatter', 'Yell', 'Shout', 'Screaming', 'Fire'
 ]  # YAMNet classes considered dangerous
-EMAIL_SENDER = 'your_email@gmail.com'  # Replace with your Gmail
-EMAIL_PASSWORD = 'your_app_password'  # Replace with Gmail app password
-EMAIL_RECIPIENT = 'recipient_email@example.com'  # Replace with recipient email
-TWILIO_SID = 'your_twilio_sid'  # Replace with Twilio SID
-TWILIO_AUTH_TOKEN = 'your_twilio_auth_token'  # Replace with Twilio Auth Token
-TWILIO_FROM = 'your_twilio_number'  # Replace with Twilio phone number
-TWILIO_TO = 'recipient_phone_number'  # Replace with recipient phone number
-CLASS_MAP_PATH = r"C:\Users\Sindhu\Desktop\IIT final\yamnet_class_map.csv"  # Local path to class map
+EMAIL_SENDER = 'media270311@gmail.com'  # Replace with your Gmail
+EMAIL_PASSWORD = 'sovy mmpn blxa jzpq'  # Replace with Gmail app password
+EMAIL_RECIPIENT = 'srinidhigouragari7@example.com'  # Replace with recipient email
+TWILIO_SID = 'AC3773b3d45f9effb0c07938c8a3b45b47'  # Replace with Twilio SID
+TWILIO_AUTH_TOKEN = 'b471eae49c67be7c692201b3529d99ea'  # Replace with Twilio Auth Token
+TWILIO_FROM = '+19475006677'  # Replace with Twilio phone number
+TWILIO_TO = '+917729936696'  # Replace with recipient phone number
+CLASS_MAP_PATH = r""  # Local path to class map
 
 # Load YAMNet model and class names
 @st.cache_resource
