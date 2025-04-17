@@ -82,7 +82,7 @@ def send_email_alert(sound_class, audio_file, location):
     msg['From'] = EMAIL_SENDER
     msg['To'] = EMAIL_RECIPIENT
     msg['Subject'] = f'Dangerous Sound Detected: {sound_class}'
-    body = f"🌐 Alert Sent\nMessage: Danger Detected: {sound_class} on {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} at {location}"
+    body = f"🌐 Alert Sent\nMessage: Danger Detected: {sound_class} on {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
     msg.attach(MIMEText(body, 'plain'))
     with open(audio_file, 'rb') as f:
         part = MIMEText(f.read(), 'audio/wav', 'utf-8')
@@ -158,7 +158,8 @@ def main():
 
     # Load model
     global model, class_names
-    model, class_names = load_yamnet()
+    with st.spinner("Loading model..."):
+        model, class_names = load_yamnet()
     if model is None or class_names is None:
         return
     # Session state
@@ -219,7 +220,7 @@ def main():
                     if email_sent and sms_sent:
                         st.markdown("<div style='padding: 10px; border: 1px solid #ccc; border-radius: 5px; color: #000000;'>"
                                     f"🌐 Alert Sent\nMessage: Danger Detected: {sound_class} on "
-                                    f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} at {location}</div>", 
+                                    f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}</div>", 
                                     unsafe_allow_html=True)
                     if os.path.exists(audio_file):
                         os.remove(audio_file)
