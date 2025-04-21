@@ -27,10 +27,10 @@ DANGEROUS_CLASSES = [
 ]  # YAMNet classes considered dangerous
 EMAIL_SENDER = 'media270311@gmail.com'  # Replace with your Gmail
 EMAIL_PASSWORD = 'sovy mmpn blxa jzpq'  # Replace with Gmail app password
-EMAIL_RECIPIENT = 'srinidhigouragari7@gmail.com'  # Replace with recipient email
-TWILIO_SID = 'AC3773b3d45f9effb0c07938c8a3b45b47'  # Replace with Twilio SID
-TWILIO_AUTH_TOKEN = 'c4d15eef9430b86e0a0407aac588dd61'  # Replace with Twilio Auth Token
-TWILIO_FROM = '+19475006677'  # Replace with Twilio phone number
+EMAIL_RECIPIENT = 'modalasravanthi9390@gmail.com'  # Replace with recipient email
+TWILIO_SID = 'ACf2a9d28bbb58e7bba109504205f14319'  # Replace with Twilio SID
+TWILIO_AUTH_TOKEN = 'e93dfd9717e39bd7671fd3e6f5713480'  # Replace with Twilio Auth Token
+TWILIO_FROM = '+13184889222'  # Replace with Twilio phone number
 TWILIO_TO = '+919390717042'
  # Replace with recipient phone number
 CLASS_MAP_PATH = r"yamnet_class_map.csv"  # Local path to class map
@@ -82,7 +82,7 @@ def send_email_alert(sound_class, audio_file, location):
     msg['From'] = EMAIL_SENDER
     msg['To'] = EMAIL_RECIPIENT
     msg['Subject'] = f'Dangerous Sound Detected: {sound_class}'
-    body = f"🌐 Alert Sent\nMessage: Danger Detected: {sound_class} on {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} at {location}"
+    body = f"🌐 Alert Sent\nMessage: Danger Detected: {sound_class} on {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
     msg.attach(MIMEText(body, 'plain'))
     with open(audio_file, 'rb') as f:
         part = MIMEText(f.read(), 'audio/wav', 'utf-8')
@@ -104,7 +104,7 @@ def send_sms_alert(sound_class, location):
     client = Client(TWILIO_SID, TWILIO_AUTH_TOKEN)
     try:
         message = client.messages.create(
-            body=f"🌐 Alert Sent\nMessage: Danger Detected: {sound_class} on {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} at {location}",
+            body=f"🌐 Alert Sent\nMessage: Danger Detected: {sound_class} on {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
             from_=TWILIO_FROM,
             to=TWILIO_TO
         )
