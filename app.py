@@ -120,26 +120,36 @@ def send_sms_alert(sound_class, location):
         st.error(f"SMS sending failed: {e}")
         return False
 
-# Record live audio
+# Record live audio with improved feedback
 def record_audio():
     if IS_STREAMLIT_CLOUD:
         raise OSError("Live audio recording is not supported on Streamlit Cloud. Please upload a WAV file instead.")
     p = pyaudio.PyAudio()
-    stream = p.open(format=pyaudio.paInt16, channels=1, rate=SAMPLE_RATE, input=True, frames_per_buffer=CHUNK)
-    frames = []
-    st.write("Recording... (10 seconds)")
-    start_time = time.time()
-    while time.time() - start_time < DURATION:
-        data = stream.read(CHUNK, exception_on_overflow=False)
-        frames.append(np.frombuffer(data, dtype=np.int16).astype(np.float32) / 32768.0)
-    stream.stop_stream()
-    stream.close()
-    p.terminate()
-    audio = np.concatenate(frames)
-    return audio
+    try:
+        stream = p.open(format=pyaudio.paInt16, channels=1, rate=SAMPLE_RATE, input=True, frames_per_buffer=CHUNK)
+        frames = []
+        st.write("Recording... (10 seconds)")
+        progress_bar = st.progress(0)
+        start_time = time.time()
+        while time.time() - start_time < DURATION:
+            data = stream.read(CHUNK, exception_on_overflow=False)
+            frames.append(np.frombuffer(data, dtype=np.int16).astype(np.float32) / 32768.0)
+            progress_bar.progress(min((time.time() - start_time) / DURATION, 1.0))
+        stream.stop_stream()
+        stream.close()
+        p.terminate()
+        audio = np.concatenate(frames)
+        st.success("Recording completed!")
+        return audio
+    except OSError as e:
+        p.terminate()
+        st.error(f"Recording failed: {e}. Ensure a microphone is connected and permissions are granted.")
+        return None
 
 # Process audio and detect top four events
 def process_audio(audio, audio_file=None):
+    if audio is None:
+        return []
     audio = preprocess_audio(audio)
     if audio_file:
         save_audio(audio, audio_file)
@@ -178,9 +188,9 @@ def main():
             st.info("Live audio recording is not supported on Streamlit Cloud. Please upload a WAV file instead.")
         else:
             if st.button("Record Live Audio (10 sec)"):
-                try:
-                    with st.spinner("Recording..."):
-                        audio = record_audio()
+                with st.spinner("Initializing recording..."):
+                    audio = record_audio()
+                    if audio is not None:
                         audio_file = f"temp_audio_{uuid.uuid4()}.wav"
                         save_audio(audio, audio_file)
                         with open(audio_file, "rb") as f:
@@ -189,8 +199,6 @@ def main():
                         st.session_state.events = events
                         if os.path.exists(audio_file):
                             os.remove(audio_file)
-                except OSError as e:
-                    st.error(f"Failed to record audio: {e}. Please ensure a microphone is available.")
 
     with col2:
         st.write("Or Upload a .wav Audio File")
