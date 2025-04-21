@@ -31,7 +31,7 @@ EMAIL_RECIPIENT = 'srinidhigouragari7@gmail.com'  # Replace with recipient email
 TWILIO_SID = 'AC3773b3d45f9effb0c07938c8a3b45b47'  # Replace with Twilio SID
 TWILIO_AUTH_TOKEN = 'c4d15eef9430b86e0a0407aac588dd61'  # Replace with Twilio Auth Token
 TWILIO_FROM = '+19475006677'  # Replace with Twilio phone number
-TWILIO_TO = '+917729936696'
+TWILIO_TO = '+919390717042'
  # Replace with recipient phone number
 CLASS_MAP_PATH = r"yamnet_class_map.csv"  # Local path to class map
 
