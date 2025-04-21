@@ -7,3 +7,4 @@ sounddevice==0.4.7
 pyaudio==0.2.14
 twilio==9.2.3
 geocoder==1.38.1
+dotenv 
